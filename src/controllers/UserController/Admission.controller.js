@@ -21,6 +21,7 @@ export const admission = async (req, res) => {
             motherPhone,
             address,
         });
+        console.log("🚀 ~ admission ~ newAdmission:", newAdmission)
 
         await newAdmission.save();
 
