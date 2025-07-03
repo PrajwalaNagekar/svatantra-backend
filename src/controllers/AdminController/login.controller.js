@@ -3,8 +3,10 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Admin from '../../models/Admin/Admin.model.js';
 export const adminLogin = async (req, res) => {
-    
+
     try {
+        console.log("🔐 Login hit", req.body); // log incoming request
+
         const { email, password } = req.body;
 
         // 1. Find admin by email
