@@ -10,7 +10,11 @@ import { allTeacherApplications } from '../controllers/AdminController/TeacherTr
 import { addEvent, deleteEvent, fetchAllEvents, updateEvent } from '../controllers/AdminController/Event.controller.js';
 import { getDashboardCounts } from '../controllers/AdminController/Dashboard.controller.js';
 const router = express.Router()
+console.log("📦 Admin routes mounted");
 
+router.get('/test', (req, res) => {
+    res.send("test route")
+})
 router.post('/login', adminLogin)
 router.use(verifyAdminToken)
 

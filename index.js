@@ -20,9 +20,10 @@ app.get('/', (req, res) => {
 // app.use('/public', express.static('public'));
 
 // app.use('/admin', adminRoutes)
-app.use('/api', UserRoutes)
-app.use('/api/admin', adminRoutes)
 
+app.use('/api', UserRoutes)
+
+app.use('/api/admin', adminRoutes)
 
 
 const startServer = async () => {
