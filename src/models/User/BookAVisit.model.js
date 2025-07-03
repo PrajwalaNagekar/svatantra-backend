@@ -1,4 +1,3 @@
-// models/BookVisit.js
 
 import mongoose from 'mongoose';
 

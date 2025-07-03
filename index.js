@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectToDb from './src/db/index.js';
 import UserRoutes from './src/routes/UserRoutes.js'
+import adminRoutes from './src/routes/AdminRoutes.js'
 dotenv.config();
 import cors from 'cors';
 
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
 
 // app.use('/admin', adminRoutes)
 app.use('/api', UserRoutes)
+app.use('/admin', adminRoutes)
+
 
 
 const startServer = async () => {
