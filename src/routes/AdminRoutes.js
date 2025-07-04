@@ -19,7 +19,7 @@ router.post('/login', adminLogin)
 router.use(verifyAdminToken)
 
 //gallery
-router.post('/upload', upload.array('images', 10), galleryUpload);
+router.post('/upload', upload.array('images', 20), galleryUpload);
 router.get('/all-images', getAllGalleryImages);
 router.delete('/delete-image/:id', deleteGalleryImage);
 router.get('/get-image-by-id/:id', getGalleryImageById);
