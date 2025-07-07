@@ -32,7 +32,64 @@ export const galleryUpload = async (req, res) => {
   }
 };
 
+// export const galleryUpload = async (req, res) => {
+//   try {
+//     const { images = [], videos = [] } = req.files;
+//     const savedDocs = [];
 
+//     // Upload images
+//     for (const file of images) {
+//       const result = await cloudinary.uploader.upload_stream(
+//         {
+//           resource_type: 'image',
+//           folder: 'gallery/images',
+//           transformation: [{ width: 800, height: 600, crop: 'limit' }],
+//         },
+//         async (error, result) => {
+//           if (error) throw error;
+//           const doc = new GalleryImage({
+//             url: result.secure_url,
+//             public_id: result.public_id,
+//             type: 'image',
+//           });
+//           await doc.save();
+//           savedDocs.push(doc);
+//         }
+//       );
+//       result.end(file.buffer);
+//     }
+
+//     // Upload videos
+//     for (const file of videos) {
+//       const result = await cloudinary.uploader.upload_stream(
+//         {
+//           resource_type: 'video',
+//           folder: 'gallery/videos',
+//         },
+//         async (error, result) => {
+//           if (error) throw error;
+//           const doc = new GalleryImage({
+//             url: result.secure_url,
+//             public_id: result.public_id,
+//             type: 'video',
+//           });
+//           await doc.save();
+//           savedDocs.push(doc);
+//         }
+//       );
+//       result.end(file.buffer);
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       message: 'Media uploaded and saved successfully',
+//       data: savedDocs,
+//     });
+//   } catch (error) {
+//     console.error('Upload error:', error);
+//     return res.status(500).json({ success: false, message: 'Server error' });
+//   }
+// };
 
 export const getAllGalleryImages = async (req, res) => {
   try {
@@ -43,7 +100,6 @@ export const getAllGalleryImages = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch images' });
   }
 };
-
 
 export const deleteGalleryImage = async (req, res) => {
   try {
@@ -64,7 +120,6 @@ export const deleteGalleryImage = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to delete image' });
   }
 };
-
 
 export const getGalleryImageById = async (req, res) => {
   try {

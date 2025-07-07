@@ -9,6 +9,11 @@ import { allVisits } from '../controllers/AdminController/visit.controller.js';
 import { allTeacherApplications } from '../controllers/AdminController/TeacherTraining.controller.js';
 import { addEvent, deleteEvent, fetchAllEvents, updateEvent } from '../controllers/AdminController/Event.controller.js';
 import { getDashboardCounts } from '../controllers/AdminController/Dashboard.controller.js';
+import uploadGallery from '../middlewares/uploadGallery.js';
+import { uploadVideos, getAllVideos, deleteVideo } from '../controllers/AdminController/Video.controller.js';
+import uploadVideosMiddleware from '../middlewares/uploadVideos.js';
+
+
 const router = express.Router()
 console.log("📦 Admin routes mounted");
 
@@ -20,6 +25,8 @@ router.use(verifyAdminToken)
 
 //gallery
 router.post('/upload', upload.array('images', 20), galleryUpload);
+// router.post('/upload', uploadGallery, galleryUpload); // supports images + videos
+
 router.get('/all-images', getAllGalleryImages);
 router.delete('/delete-image/:id', deleteGalleryImage);
 router.get('/get-image-by-id/:id', getGalleryImageById);
@@ -29,6 +36,7 @@ router.get('/all-applications', allApplications)
 
 //enquiry
 router.get('/all-enquiries', allEnquiries)
+
 
 //visits
 router.get('/all-visits', allVisits)
@@ -45,5 +53,9 @@ router.delete('/delete-event/:id', deleteEvent);
 //dashboard
 router.get('/dashboard-counts', getDashboardCounts)
 
+//video upload
+router.post('/upload-videos', uploadVideosMiddleware, uploadVideos);
+router.get('/all-videos', getAllVideos);
+router.delete('/delete-video/:id', deleteVideo);
 
 export default router

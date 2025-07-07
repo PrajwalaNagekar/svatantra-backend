@@ -26,8 +26,8 @@ const seedAdminUsers = async () => {
 
             const newAdmin = new Admin(admin);
             console.log("🚀 ~ seedAdminUsers ~ newAdmin:", newAdmin)
-            await newAdmin.save(); // ✅ use .save() to trigger pre-save middleware
-            console.log(`✅ Admin created: ${admin.email}`);
+            await newAdmin.save(); //  use .save() to trigger pre-save middleware
+            console.log(` Admin created: ${admin.email}`);
         }
 
         process.exit();
