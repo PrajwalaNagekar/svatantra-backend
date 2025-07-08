@@ -4,33 +4,39 @@ import Admin from '../../models/Admin/Admin.model.js';
 
 dotenv.config();
 
+const ADMIN_NAME = process.env.ADMIN_NAME;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+console.log("🚀 ~ ADMIN_NAME:", ADMIN_NAME);
+console.log("🚀 ~ ADMIN_EMAIL:", ADMIN_EMAIL);
+console.log("🚀 ~ ADMIN_PASSWORD:", ADMIN_PASSWORD);
+
 const seedAdminUsers = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);
-        console.log(' Connected to MongoDB');
+        console.log('✅ Connected to MongoDB');
 
-        const admins = {
-            name: process.env.ADMIN_NAME,
-            email: process.env.ADMIN_EMAIL,
-            password: process.env.ADMIN_PASSWORD,
+        const admin = {
+            name: ADMIN_NAME,
+            email: ADMIN_EMAIL,
+            password: ADMIN_PASSWORD,
         };
 
-        for (let admin of admins) {
-            const exists = await Admin.findOne({ email: admin.email });
-            if (exists) {
-                console.log(` Admin already exists: ${admin.email}`);
-                continue;
-            }
+        console.log("🚀 ~ Admin Object:", admin);
 
+        const exists = await Admin.findOne({ email: admin.email });
+        if (exists) {
+            console.log(`⚠️ Admin already exists: ${admin.email}`);
+        } else {
             const newAdmin = new Admin(admin);
-            console.log("🚀 ~ seedAdminUsers ~ newAdmin:", newAdmin)
-            await newAdmin.save(); //  use .save() to trigger pre-save middleware
-            console.log(` Admin created: ${admin.email}`);
+            await newAdmin.save();
+            console.log(`✅ Admin created: ${admin.email}`);
         }
 
         process.exit();
     } catch (error) {
-        console.error('❌ Error seeding admins:', error.message);
+        console.error('❌ Error seeding admin:', error.message);
         process.exit(1);
     }
 };
