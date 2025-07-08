@@ -9,13 +9,11 @@ const seedAdminUsers = async () => {
         await mongoose.connect(process.env.MONGODB_URI);
         console.log(' Connected to MongoDB');
 
-        const admins = [
-            {
-                name: 'Admin One',
-                email: 'admin@gmail.com',
-                password: 'Admin123',
-            },
-        ];
+        const admins = {
+            name: process.env.ADMIN_NAME,
+            email: process.env.ADMIN_EMAIL,
+            password: process.env.ADMIN_PASSWORD,
+        };
 
         for (let admin of admins) {
             const exists = await Admin.findOne({ email: admin.email });
