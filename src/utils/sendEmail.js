@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS  // App password from Gmail settings
     }
 });
-        console.log("🚀 ~  process.env.EMAIL_USER:",  process.env.EMAIL_USER)
+        console.log("🚀 ~  process.env.EMAIL_USER:",  process.env.EMAIL_PASS)
 
 /**e
  * Send an email
